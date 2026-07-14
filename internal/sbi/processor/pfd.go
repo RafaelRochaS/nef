@@ -176,6 +176,12 @@ func (p *Processor) DeletePFDManagementTransactions(c *gin.Context, scsAsID stri
 
 	// TODO: Remove AfCtx if its subscriptions and transactions are both empty
 
+	if len(af.PfdTrans) == 0 && len(af.Subs) == 0 {
+		logger.PFDManageLog.Infof("AF subscriptions and transactions are empty, deleting from context")
+
+		nefCtx.DeleteAf(af.AfID)
+	}
+
 	c.Status(http.StatusNoContent)
 }
 

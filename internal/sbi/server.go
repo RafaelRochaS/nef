@@ -94,6 +94,15 @@ func NewServer(nef nef, tlsKeyLogPath string) (*Server, error) {
 				authCheck.Check(c, s.Context())
 			})
 			applyRoutes(tiGroup, s.getTrafficInfluenceRoutes())
+
+		case factory.ServiceAsSessionWithQos:
+			// 3gpp-as-session-with-qos is an AF-facing API (3GPP TS 29.122);
+			authCheck := nef_util.NewRouterAuthorizationCheck(models.ServiceName_3GPP_AS_SESSION_WITH_QOS)
+			asSesWithQoS := s.router.Group(factory.ServiceAsSessionWithQos)
+			asSesWithQoS.Use(func(c *gin.Context) {
+				authCheck.Check(c, s.Context())
+			})
+			applyRoutes(asSesWithQoS, s.getAsSessionWithQoSRoutes())
 		}
 	}
 

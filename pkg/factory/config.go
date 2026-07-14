@@ -20,11 +20,12 @@ import (
 )
 
 const (
-	ServiceTraffInflu  string = "3gpp-traffic-influence"
-	ServicePfdMng      string = "3gpp-pfd-management"
-	ServiceNefPfd      string = string(models.ServiceName_NNEF_PFDMANAGEMENT)
-	ServiceNefOam      string = "nnef-oam"
-	ServiceNefCallback string = "nnef-callback"
+	ServiceTraffInflu       string = "3gpp-traffic-influence"
+	ServicePfdMng           string = "3gpp-pfd-management"
+	ServiceAsSessionWithQos string = "3gpp-as-session-with-qos"
+	ServiceNefPfd           string = string(models.ServiceName_NNEF_PFDMANAGEMENT)
+	ServiceNefOam           string = "nnef-oam"
+	ServiceNefCallback      string = "nnef-callback"
 )
 
 const (
@@ -44,6 +45,7 @@ const (
 	NefDefaultNrfUri             = "https://127.0.0.10:8000"
 	TraffInfluResUriPrefix       = "/" + ServiceTraffInflu + "/v1"
 	PfdMngResUriPrefix           = "/" + ServicePfdMng + "/v1"
+	AsSessionWithQosPrefix       = "/" + ServiceAsSessionWithQos + "/v1"
 	NefPfdMngResUriPrefix        = "/" + ServiceNefPfd + "/v1"
 	NefOamResUriPrefix           = "/" + ServiceNefOam + "/v1"
 	NefCallbackResUriPrefix      = "/" + ServiceNefCallback + "/v1"
@@ -575,6 +577,8 @@ func (c *Config) ServiceUri(name string) string {
 		return c.SbiUri() + NefOamResUriPrefix
 	case ServiceNefCallback:
 		return c.SbiUri() + NefCallbackResUriPrefix
+	case ServiceAsSessionWithQos:
+		return c.SbiUri() + AsSessionWithQosPrefix
 	default:
 		return ""
 	}
