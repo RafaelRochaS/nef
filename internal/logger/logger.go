@@ -22,6 +22,7 @@ var (
 	PFDManageLog *logrus.Entry
 	PFDFLog      *logrus.Entry
 	OamLog       *logrus.Entry
+	AsSessQoSLog *logrus.Entry
 )
 
 const (
@@ -54,4 +55,5 @@ func init() {
 	PFDManageLog = NfLog.WithField(logger_util.FieldCategory, "PFDMng")
 	PFDFLog = NfLog.WithField(logger_util.FieldCategory, "PFDF")
 	OamLog = NfLog.WithField(logger_util.FieldCategory, "OAM")
+	AsSessQoSLog = NfLog.WithField(logger_util.FieldCategory, "AsSessQoS")
 }
